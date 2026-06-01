@@ -1,12 +1,22 @@
 import yfinance as yf
 
-nifty = yf.download("^NSEI", period = '1y')
+def get_nifty_data():
 
-print(nifty.tail())
+    df = yf.download("^NSEI", period= "1y", auto_adjust=True)
 
-latest_price  = nifty["Close"].iloc[-1]
+    return df
 
-daily_return = (nifty["Close"].pct_change().iloc[-1]*100)
+if __name__ == "__main__":
 
-print('latest price :' , latest_price)
-print("daily return : " , daily_return)
+    nifty = get_nifty_data()
+
+    latest_price = nifty["Close"].iloc[-1].item()
+
+    daily_return = (nifty["Close"].pct_change().iloc[-1].item()) * 100
+
+    print(f"Latest Price : {latest_price:.2f}")
+    print(f"Daily Return : {daily_return:.2f}%")
+
+    nifty.to_csv("../data/nifty.csv")
+
+    print("Data Saved Successfully ")
