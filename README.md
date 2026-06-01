@@ -1,1 +1,1 @@
-# Nifty-wrapper
+# Nifty Wrapper
