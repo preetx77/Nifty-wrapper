@@ -21,3 +21,21 @@ def moving_averages(df, days):
 
 def latest_close(df):
     return df["Close"].iloc[-1].item()
+
+
+def vix_regime(vix):
+
+    if vix < 15:
+        return "LOW FEAR"
+    elif vix < 25:
+        return "HIGH FEAR"
+    elif vix < 20:
+        return "NORMAL FEAR"
+    return "PANIC"
+
+def market_regime(current_price, dma200):
+
+    if current_price > dma200:
+        return "BULL MARKET"
+    
+    return "BEAR MARKET"

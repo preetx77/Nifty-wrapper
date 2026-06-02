@@ -4,7 +4,9 @@ from metrics import (
     fifty_two_week_low , 
     annualized_volatility,
     moving_averages,
-    latest_close
+    latest_close,
+    vix_regime,
+    market_regime
 )
 from fetch_vix import get_vix_data
 
@@ -30,4 +32,20 @@ print(f"200 DMA : {dma200:.2f}")
 vix = get_vix_data()
 current_vix = latest_close(vix)
 
-print(f"India VIX : {current_vix:.2f}")
+
+fear_level = vix_regime(current_vix)
+
+
+current_price = nifty["Close"].iloc[-1].item()
+
+regime = market_regime(current_price, dma200)
+
+
+
+print("\nMARKET SUMMARY")
+print("-" * 30)
+
+print(f"Nifty Price    : {current_price:.2f}")
+print(f"India VIX      : {current_vix:.2f}")
+print(f"Fear Level     : {fear_level}")
+print(f"Market Regime  : {regime}")
