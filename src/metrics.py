@@ -18,3 +18,6 @@ def annualized_volatility(df):
 
 def moving_averages(df, days):
     return (df["Close"].rolling(days).mean().iloc[-1].item())
+
+def latest_close(df):
+    return df["Close"].iloc[-1].item()

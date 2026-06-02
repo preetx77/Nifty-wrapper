@@ -3,8 +3,11 @@ from metrics import (
     fifty_two_week_high, 
     fifty_two_week_low , 
     annualized_volatility,
-    moving_averages
+    moving_averages,
+    latest_close
 )
+from fetch_vix import get_vix_data
+
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -23,3 +26,8 @@ print(f"Anuallized Volatility :  {volatility:.2f}%")
 print(f"20 DMA  : {dma20:.2f}")
 print(f"50 DMA  : {dma50:.2f}")
 print(f"200 DMA : {dma200:.2f}")
+
+vix = get_vix_data()
+current_vix = latest_close(vix)
+
+print(f"India VIX : {current_vix:.2f}")
