@@ -9,6 +9,10 @@ from metrics import (
     market_regime
 )
 from fetch_vix import get_vix_data
+from breadth import (
+    breadth_analysis,
+    breadth_strength
+)
 
 
 nifty = get_nifty_data()
@@ -21,8 +25,8 @@ dma50 = moving_averages(nifty, 50)
 dma200 = moving_averages(nifty, 200)
 
 
-print(f"25 Week High : {high:.2f}")
-print(f"25 Week Low : {low:.2f}")
+print(f"52 Week High : {high:.2f}")
+print(f"52 Week Low : {low:.2f}")
 print(f"Anuallized Volatility :  {volatility:.2f}%")
 
 print(f"20 DMA  : {dma20:.2f}")
@@ -49,3 +53,26 @@ print(f"Nifty Price    : {current_price:.2f}")
 print(f"India VIX      : {current_vix:.2f}")
 print(f"Fear Level     : {fear_level}")
 print(f"Market Regime  : {regime}")
+
+above_50dma, total = breadth_analysis()
+
+breadth_score = (
+    above_50dma / total
+)
+
+strength = breadth_strength(
+    breadth_score
+)
+
+print("\nMARKET BREADTH")
+print("-" * 30)
+
+print(
+    f"Stocks Above 50 DMA : "
+    f"{above_50dma}/{total}"
+)
+
+print(
+    f"Breadth Strength    : "
+    f"{strength}"
+)

@@ -27,10 +27,10 @@ def vix_regime(vix):
 
     if vix < 15:
         return "LOW FEAR"
-    elif vix < 25:
-        return "HIGH FEAR"
     elif vix < 20:
-        return "NORMAL FEAR"
+        return "NORMAL"
+    elif vix < 20:
+        return "HIGH FEAR"
     return "PANIC"
 
 def market_regime(current_price, dma200):
@@ -39,3 +39,9 @@ def market_regime(current_price, dma200):
         return "BULL MARKET"
     
     return "BEAR MARKET"
+
+# for nifty 50
+def is_above_dma(current_price, dma):
+    return current_price > dma
+
+    
