@@ -13,6 +13,7 @@ from breadth import (
     breadth_analysis,
     breadth_strength
 )
+from correlation import ( daily_returns, correlation)
 
 
 nifty = get_nifty_data()
@@ -76,3 +77,14 @@ print(
     f"Breadth Strength    : "
     f"{strength}"
 )
+
+nifty_returns = daily_returns(nifty)
+
+vix_returns = daily_returns(vix)
+
+corr = correlation(nifty_returns,vix_returns)
+
+print("\nNIFTY ↔ VIX CORRELATION")
+print("-" * 30)
+
+print(f"Correlation : {corr:.2f}")
