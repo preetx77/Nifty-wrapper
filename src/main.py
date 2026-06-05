@@ -13,7 +13,7 @@ from breadth import (
     breadth_analysis,
     breadth_strength
 )
-from correlation import ( daily_returns, correlation)
+from correlation import ( daily_returns, correlation, rolling_correlation)
 
 
 nifty = get_nifty_data()
@@ -79,12 +79,17 @@ print(
 )
 
 nifty_returns = daily_returns(nifty)
-
 vix_returns = daily_returns(vix)
-
 corr = correlation(nifty_returns,vix_returns)
+
+rolling_corr = rolling_correlation(nifty_returns, vix_returns)
+latest_rolling_corr = (rolling_corr.iloc[-1])
 
 print("\nNIFTY ↔ VIX CORRELATION")
 print("-" * 30)
-
 print(f"Correlation : {corr:.2f}")
+
+print("\n30 DAY ROLLING CORRELATION")
+print("-" * 30)
+
+print(f"Latest Rolling Corr : " f"{latest_rolling_corr:.2f}")
