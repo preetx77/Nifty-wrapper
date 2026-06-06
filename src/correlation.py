@@ -3,10 +3,7 @@ import pandas as pd
 
 def daily_returns(df):
 
-    returns = (
-        df["Close"]
-        .pct_change()
-    )
+    returns = (df["Close"].pct_change())
 
     return returns
 
@@ -23,3 +20,13 @@ def rolling_correlation(series1, series2, window=30):
     rolling_corr = (merged.iloc[:, 0].rolling(window).corr(merged.iloc[:,1] ))
     
     return rolling_corr
+
+def rolling_regime(corr):
+    if corr<= -0.8:
+        return "PANIC CORRELATION"
+    elif corr <= -0.5:
+        return "RISK - OFF"
+    elif corr <= -0.2:
+        return "NORMAL"
+
+    return "DISCONNECTED"

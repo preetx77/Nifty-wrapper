@@ -13,7 +13,7 @@ from breadth import (
     breadth_analysis,
     breadth_strength
 )
-from correlation import ( daily_returns, correlation, rolling_correlation)
+from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
 
 
 nifty = get_nifty_data()
@@ -93,3 +93,6 @@ print("\n30 DAY ROLLING CORRELATION")
 print("-" * 30)
 
 print(f"Latest Rolling Corr : " f"{latest_rolling_corr:.2f}")
+
+regime = rolling_regime(latest_rolling_corr)
+print(f"Correlation Regime : " f"{regime}")
