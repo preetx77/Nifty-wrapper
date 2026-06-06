@@ -14,7 +14,7 @@ from breadth import (
     breadth_strength
 )
 from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
-
+from visualize import (plot_nifty_trend)
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -96,3 +96,9 @@ print(f"Latest Rolling Corr : " f"{latest_rolling_corr:.2f}")
 
 regime = rolling_regime(latest_rolling_corr)
 print(f"Correlation Regime : " f"{regime}")
+
+nifty["20DMA"] = (nifty["Close"].rolling(20).mean())
+nifty["50DMA"] = (nifty["Close"].rolling(50).mean())
+nifty["200DMA"] = (nifty["Close"].rolling(200).mean())
+
+plot_nifty_trend(nifty)
