@@ -14,7 +14,9 @@ from breadth import (
     breadth_strength
 )
 from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
-from visualize import (plot_nifty_trend)
+from visualize import (plot_nifty_trend, plot_vix, plot_rolling_correaltion)
+from signal import trading_signal
+
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -102,3 +104,10 @@ nifty["50DMA"] = (nifty["Close"].rolling(50).mean())
 nifty["200DMA"] = (nifty["Close"].rolling(200).mean())
 
 plot_nifty_trend(nifty)
+plot_rolling_correaltion(rolling_corr)
+
+# signal generation 
+signal = trading_signal(current_price, dma200, current_vix, breadth_score)
+print("\nTRADING SIGNAL")
+print("-" * 30)
+print(f"Signal : {signal}")
