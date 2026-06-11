@@ -15,8 +15,8 @@ from breadth import (
 )
 from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
 from visualize import (plot_nifty_trend, plot_vix, plot_rolling_correaltion)
-from signal import trading_signal
-
+from signals import trading_signal
+from backtest import run_backtest
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -111,3 +111,9 @@ signal = trading_signal(current_price, dma200, current_vix, breadth_score)
 print("\nTRADING SIGNAL")
 print("-" * 30)
 print(f"Signal : {signal}")
+
+# backtesting engine 
+portfoilio = run_backtest(nifty)
+print("\n BACKTEST RESULTS")
+print("-"* 30)
+print(portfoilio.stats())
