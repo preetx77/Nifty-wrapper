@@ -2,7 +2,7 @@ import yfinance as yf
 
 def get_nifty_data():
 
-    df = yf.download("^NSEI", period= "1y", auto_adjust=True)
+    df = yf.download("^NSEI", period= "5y", auto_adjust=True)
 
     return df
 
