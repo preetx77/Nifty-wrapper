@@ -1,4 +1,4 @@
-Price,Close,High,Low,Open,Volume
+prinPrice,Close,High,Low,Open,Volume
 Ticker,^NSEI,^NSEI,^NSEI,^NSEI,^NSEI
 Date,,,,,
 2025-06-02,24716.599609375,24754.400390625,24526.150390625,24669.69921875,311100
