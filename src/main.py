@@ -17,6 +17,7 @@ from correlation import ( daily_returns, correlation, rolling_correlation, rolli
 from visualize import (plot_nifty_trend, plot_vix, plot_rolling_correaltion)
 from signals import trading_signal
 from backtest import run_backtest
+from optimize import optimize_strategy
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -117,3 +118,17 @@ portfoilio = run_backtest(nifty)
 print("\n BACKTEST RESULTS")
 print("-"* 30)
 print(portfoilio.stats())
+
+# optmizing strategy
+results = optimize_strategy(nifty)
+
+print("\n STRATEGY OPTIMIZATION")
+print("-"*30)
+
+for result in results:
+
+    print(f"MA: {result['MA']} | "
+        f"Return: {result['Return']:.2f} | "
+        f"Sharpe: {result['Sharpe']:.2f} | "
+        f"Drawdown: {result['Drawdown']:.2f}"
+    )
