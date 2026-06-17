@@ -18,6 +18,7 @@ from visualize import (plot_nifty_trend, plot_vix, plot_rolling_correaltion)
 from signals import trading_signal
 from backtest import run_backtest
 from optimize import optimize_strategy
+from walkforward import (walk_forward_test)
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -132,3 +133,21 @@ for result in results:
         f"Sharpe: {result['Sharpe']:.2f} | "
         f"Drawdown: {result['Drawdown']:.2f}"
     )
+
+# walkforward test 
+train_pf, test_pf = (
+    walk_forward_test(nifty)
+)
+
+print("\nWALK FORWARD TEST")
+print("-" * 30)
+
+print(
+    f"Train Return : "
+    f"{train_pf.total_return().iloc[0]:.2f}"
+)
+
+print(
+    f"Test Return  : "
+    f"{test_pf.total_return().iloc[0]:.2f}"
+)
