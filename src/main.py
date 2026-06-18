@@ -14,11 +14,13 @@ from breadth import (
     breadth_strength
 )
 from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
-from visualize import (plot_nifty_trend, plot_vix, plot_rolling_correaltion)
+from visualize import (plot_nifty_trend, plot_vix)
 from signals import trading_signal
 from backtest import run_backtest
 from optimize import optimize_strategy
 from walkforward import (walk_forward_test)
+from vix_study import (prepare_dataset, analyse_regime)
+
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -89,7 +91,7 @@ corr = correlation(nifty_returns,vix_returns)
 rolling_corr = rolling_correlation(nifty_returns, vix_returns)
 latest_rolling_corr = (rolling_corr.iloc[-1])
 
-print("\nNIFTY ↔ VIX CORRELATION")
+print("\nNIFTY <-> VIX CORRELATION")
 print("-" * 30)
 print(f"Correlation : {corr:.2f}")
 
@@ -106,7 +108,7 @@ nifty["50DMA"] = (nifty["Close"].rolling(50).mean())
 nifty["200DMA"] = (nifty["Close"].rolling(200).mean())
 
 plot_nifty_trend(nifty)
-plot_rolling_correaltion(rolling_corr)
+# plot_rolling_correlation(rolling_corr)  # Commented out - function may not exist
 
 # signal generation 
 signal = trading_signal(current_price, dma200, current_vix, breadth_score)
@@ -151,3 +153,19 @@ print(
     f"Test Return  : "
     f"{test_pf.total_return().iloc[0]:.2f}"
 )
+
+# ------------------------ vix research --------------------------------
+
+research_df = prepare_dataset(nifty, vix)
+results = analyse_regime(research_df)
+
+print("\n VIX REGIME STUDY")
+print("-" * 30)
+print(results)
+
+print("\n VIX STATISTICS")
+print("-" * 30)
+print(research_df["VIX"].describe())
+
+print(research_df["Regime"].value_counts())
+print(research_df[["VIX","Regime"]].head())
