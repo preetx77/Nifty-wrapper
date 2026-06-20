@@ -20,6 +20,7 @@ from backtest import run_backtest
 from optimize import optimize_strategy
 from walkforward import (walk_forward_test)
 from vix_study import (prepare_dataset, analyse_regime)
+from trend_study import (prepare_trend_dataset, analyze_trend)
 
 
 nifty = get_nifty_data()
@@ -169,3 +170,13 @@ print(research_df["VIX"].describe())
 
 print(research_df["Regime"].value_counts())
 print(research_df[["VIX","Regime"]].head())
+
+# -------------- trend study ---------------------------
+trend_df = (prepare_trend_dataset(nifty))
+
+trend_results = (analyze_trend(trend_df))
+
+print("\nTREND PERSISTENCE STUDY")
+print("-" * 30)
+
+print(trend_results)
