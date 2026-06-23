@@ -21,7 +21,7 @@ from optimize import optimize_strategy
 from walkforward import (walk_forward_test)
 from vix_study import (prepare_dataset, analyse_regime)
 from trend_study import (prepare_trend_dataset, analyze_trend)
-
+from drawdown_study import (prepare_drawdown_dataset, analyse_drawdown)
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -180,3 +180,13 @@ print("\nTREND PERSISTENCE STUDY")
 print("-" * 30)
 
 print(trend_results)
+
+# --------------- Drawdown Study---------------------------
+
+drawdown_df = (prepare_drawdown_dataset(nifty))
+drawdown_results = (analyse_drawdown(drawdown_df))
+
+print("\n DRAWDOWN RECOVERY STUDY")
+print("-" * 50)
+
+print(drawdown_results)
