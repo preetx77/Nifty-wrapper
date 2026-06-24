@@ -22,6 +22,8 @@ from walkforward import (walk_forward_test)
 from vix_study import (prepare_dataset, analyse_regime)
 from trend_study import (prepare_trend_dataset, analyze_trend)
 from drawdown_study import (prepare_drawdown_dataset, analyse_drawdown)
+from drawdown_v2 import (drawdown_distribution)
+
 
 nifty = get_nifty_data()
 high = fifty_two_week_high(nifty)
@@ -190,3 +192,12 @@ print("\n DRAWDOWN RECOVERY STUDY")
 print("-" * 50)
 
 print(drawdown_results)
+
+# ------------------- Drawdown V2 -----------------------------
+v2_df = prepare_drawdown_dataset(nifty)
+v2_results = drawdown_distribution(v2_df)
+
+print("\n DRAWDOWN RECOVERY V2")
+print("-" * 50)
+print(v2_results)
+
