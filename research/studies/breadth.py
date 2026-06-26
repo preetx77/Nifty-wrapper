@@ -1,7 +1,7 @@
 import yfinance as yf 
 
-from nifty50 import NIFTY50 
-from metrics import ( 
+from src.nifty50 import NIFTY50 
+from src.metrics import ( 
     moving_averages,
     is_above_dma
 )

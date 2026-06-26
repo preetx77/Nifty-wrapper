@@ -1,5 +1,5 @@
-from fetch_data import get_nifty_data
-from metrics import (
+from src.fetch_data import get_nifty_data
+from src.metrics import (
     fifty_two_week_high, 
     fifty_two_week_low , 
     annualized_volatility,
@@ -8,21 +8,20 @@ from metrics import (
     vix_regime,
     market_regime
 )
-from fetch_vix import get_vix_data
-from breadth import (
+from src.fetch_vix import get_vix_data
+from research.studies.breadth import (
     breadth_analysis,
     breadth_strength
 )
-from correlation import ( daily_returns, correlation, rolling_correlation, rolling_regime)
-from visualize import (plot_nifty_trend, plot_vix)
-from signals import trading_signal
-from backtest import run_backtest
-from optimize import optimize_strategy
-from walkforward import (walk_forward_test)
-from vix_study import (prepare_dataset, analyse_regime)
-from trend_study import (prepare_trend_dataset, analyze_trend)
-from drawdown_study import (prepare_drawdown_dataset, analyse_drawdown)
-from drawdown_v2 import (drawdown_distribution)
+from research.studies.correlation import (daily_returns, correlation, rolling_correlation, rolling_regime)
+from src.visualize import (plot_nifty_trend, plot_vix)
+from src.signals import trading_signal
+from src.backtest import run_backtest
+from src.optimize import optimize_strategy
+from src.walkforward import (walk_forward_test)
+from research.studies.vix import (prepare_dataset, analyse_regime)
+from research.studies.trend import (prepare_trend_dataset, analyze_trend)
+from research.studies.drawdown import (prepare_drawdown_dataset, analyse_drawdown, drawdown_distribution)
 
 
 nifty = get_nifty_data()
