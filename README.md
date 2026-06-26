@@ -184,4 +184,5 @@ See `requirements.txt` for full list.
 
 ## 📞 Contact
 
-For questions or suggestions, review the code in `src/main.py` for workflow overview.
+For questions or suggestions, feel free to reach out at preetxyz77@gmail.com
+
