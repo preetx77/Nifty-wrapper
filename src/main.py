@@ -1,10 +1,3 @@
-# ============================================================================
-# MARKET ANALYSIS ORCHESTRATOR
-# ============================================================================
-# This file orchestrates the entire market analysis pipeline.
-# Each function represents a distinct responsibility.
-# No calculation logic here - only orchestration.
-# ============================================================================
 
 from src.fetch_data import get_nifty_data
 from src.fetch_vix import get_vix_data
@@ -49,12 +42,10 @@ def initialize_market():
     return nifty, vix
 
 
-# ============================================================================
-# PIPELINE FUNCTIONS
-# ============================================================================
+
 
 def run_market_summary(nifty, vix):
-    """Analyze key market metrics and regime."""
+    
     high = fifty_two_week_high(nifty)
     low = fifty_two_week_low(nifty)
     volatility = annualized_volatility(nifty)
@@ -87,7 +78,7 @@ def run_market_summary(nifty, vix):
 
 
 def run_breadth_analysis():
-    """Analyze market breadth - percentage of stocks above 50-day MA."""
+    
     above_50dma, total = breadth_analysis()
     breadth_score = above_50dma / total
     strength = breadth_strength(breadth_score)
@@ -101,7 +92,7 @@ def run_breadth_analysis():
 
 
 def run_correlation_analysis(nifty, vix):
-    """Analyze NIFTY-VIX correlation and regimes."""
+    
     nifty_returns = daily_returns(nifty)
     vix_returns = daily_returns(vix)
     corr = correlation(nifty_returns, vix_returns)
@@ -121,7 +112,7 @@ def run_correlation_analysis(nifty, vix):
 
 
 def run_visualizations(nifty, vix):
-    """Generate market visualizations."""
+   
     nifty["20DMA"] = nifty["Close"].rolling(20).mean()
     nifty["50DMA"] = nifty["Close"].rolling(50).mean()
     nifty["200DMA"] = nifty["Close"].rolling(200).mean()
@@ -131,7 +122,7 @@ def run_visualizations(nifty, vix):
 
 
 def run_signal_engine(current_price, dma200, current_vix, breadth_score):
-    """Generate trading signal based on market conditions."""
+   
     signal = trading_signal(current_price, dma200, current_vix, breadth_score)
 
     print("\nTRADING SIGNAL")
@@ -142,7 +133,7 @@ def run_signal_engine(current_price, dma200, current_vix, breadth_score):
 
 
 def run_backtest_engine(nifty):
-    """Execute backtest on historical data."""
+   
     portfolio = run_backtest(nifty)
 
     print("\nBACKTEST RESULTS")
@@ -153,7 +144,7 @@ def run_backtest_engine(nifty):
 
 
 def run_optimizer(nifty):
-    """Optimize strategy parameters."""
+    
     results = optimize_strategy(nifty)
 
     print("\nSTRATEGY OPTIMIZATION")
@@ -170,7 +161,7 @@ def run_optimizer(nifty):
 
 
 def run_walkforward(nifty):
-    """Execute walk-forward validation."""
+   
     train_pf, test_pf = walk_forward_test(nifty)
 
     print("\nWALK FORWARD TEST")
@@ -182,7 +173,7 @@ def run_walkforward(nifty):
 
 
 def run_research_suite(nifty, vix):
-    """Execute all research studies."""
+    
     print("\n" + "=" * 60)
     print("RESEARCH STUDIES")
     print("=" * 60)
@@ -224,7 +215,7 @@ def run_research_suite(nifty, vix):
 # ============================================================================
 
 def main():
-    """Main orchestrator - executes all analysis pipelines."""
+    
     print("=" * 60)
     print("NIFTY 50 MARKET ANALYSIS")
     print("=" * 60)
@@ -232,7 +223,7 @@ def main():
     # Initialize market data
     nifty, vix = initialize_market()
 
-    # Run analysis pipelines
+    
     current_price, current_vix, dma200 = run_market_summary(nifty, vix)
     breadth_score = run_breadth_analysis()
     run_correlation_analysis(nifty, vix)
