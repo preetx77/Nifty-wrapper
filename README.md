@@ -1,188 +1,277 @@
-# NIFTY 50 Market Analysis & Trading System
+# NIFTY Research Lab
 
-A Python-based tool for analyzing the Indian stock market (NIFTY 50) using technical indicators, correlation analysis, and backtesting strategies.
+A hypothesis-driven quantitative research framework for studying the Indian equity market.
 
----
+Instead of building another technical indicator dashboard, this project focuses on testing market hypotheses using historical data, event studies, forward return analysis, and systematic validation.
 
-## 📋 What This Project Does
+The goal is to answer questions such as:
 
-This system analyzes market trends and generates trading signals by:
-- Fetching real-time market data (NIFTY 50 index & India VIX)
-- Calculating key technical indicators (moving averages, volatility, breadth)
-- Analyzing market regimes and fear levels
-- Backtesting trading strategies
-- Optimizing strategy parameters
-- Evaluating drawdown recovery patterns
+- Does market fear create future opportunity?
+- Do deep drawdowns historically recover faster?
+- Does trend persistence actually exist?
+- Can market states be quantified rather than guessed?
 
 ---
 
-## 🚀 Quick Start
+## Motivation
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
+Most retail trading systems begin with an indicator and search for confirmation.
+
+This project follows the opposite workflow.
+
+```
+Observation
+      ↓
+Hypothesis
+      ↓
+Historical Data
+      ↓
+Statistical Analysis
+      ↓
+Forward Return Measurement
+      ↓
+Conclusion
 ```
 
-### 2. Run Analysis
-```bash
-cd src
-python main.py
-```
+Every module is built to test a market hypothesis rather than generate arbitrary trading signals.
 
 ---
 
-## 📁 Project Structure
+## Research Questions Explored
+
+### Volatility Regimes
+
+> What happens to NIFTY after different India VIX regimes?
+
+Measures forward returns after:
+
+- Low VIX
+- Normal VIX
+- High VIX
+
+---
+
+### Trend Persistence
+
+> Does trading above the 200 DMA actually improve future returns?
+
+Compares forward performance when NIFTY trades:
+
+- Above 200 DMA
+- Below 200 DMA
+
+---
+
+### Drawdown Recovery
+
+> Do larger market corrections lead to stronger recoveries?
+
+Classifies drawdowns into:
+
+- None
+- Mild
+- Moderate
+- Severe
+
+Then measures:
+
+- 20-Day Forward Return
+- 60-Day Forward Return
+- 120-Day Forward Return
+
+---
+
+### Drawdown Distribution Analysis
+
+Instead of relying only on averages, the framework evaluates:
+
+- Sample Size
+- Mean
+- Median
+- Standard Deviation
+- Best Recovery
+- Worst Recovery
+
+This helps determine whether an apparent edge is broad-based or driven by a few outliers.
+
+---
+
+## Current Capabilities
+
+### Market Analytics
+
+- NIFTY 50 Market Summary
+- India VIX Monitoring
+- Annualized Volatility
+- 52 Week High / Low
+- Moving Averages (20 / 50 / 200 DMA)
+- Market Regime Classification
+
+---
+
+### Breadth Analysis
+
+Measures internal market participation using:
+
+- Stocks Above 50 DMA
+- Breadth Strength Classification
+
+---
+
+### Correlation Analysis
+
+Studies the relationship between:
+
+- NIFTY Returns
+- India VIX Returns
+
+Includes:
+
+- Daily Correlation
+- Rolling Correlation
+- Correlation Regime Detection
+
+---
+
+### Strategy Research
+
+Includes:
+
+- Signal Generation
+- Historical Backtesting
+- Walk Forward Validation
+- Strategy Optimization
+
+Performance is evaluated using:
+
+- Total Return
+- Sharpe Ratio
+- Sortino Ratio
+- Calmar Ratio
+- Profit Factor
+- Drawdown
+- Win Rate
+
+---
+
+## Project Structure
 
 ```
 finance/
-├── src/
-│   ├── main.py                 # Entry point - runs complete analysis
-│   ├── fetch_data.py           # Downloads NIFTY & VIX data
-│   ├── fetch_vix.py            # VIX data fetching
-│   ├── metrics.py              # Technical indicators (volatility, moving averages)
-│   ├── breadth.py              # Market breadth analysis
-│   ├── correlation.py          # NIFTY-VIX correlation analysis
-│   ├── signals.py              # Trading signal generation
-│   ├── backtest.py             # Backtesting engine
-│   ├── optimize.py             # Strategy parameter optimization
-│   ├── walkforward.py          # Walk-forward testing
-│   ├── visualize.py            # Charts & plots
-│   ├── vix_study.py            # VIX regime analysis
-│   ├── trend_study.py          # Trend persistence research
-│   ├── drawdown_study.py       # Drawdown analysis
-│   ├── drawdown_v2.py          # Enhanced drawdown analysis
-│   ├── nifty50.py              # NIFTY 50 ticker list
-│   └── research.py             # Research utilities
+│
 ├── data/
-│   └── nifty.csv              # Cached NIFTY 50 data
-└── requirements.txt            # Python dependencies
+│
+├── research/
+│   ├── core/
+│   │   ├── future_returns.py
+│   │   ├── regimes.py
+│   │   ├── statistics.py
+│   │   └── utils.py
+│   │
+│   ├── studies/
+│   │   ├── vix.py
+│   │   ├── trend.py
+│   │   ├── drawdown.py
+│   │   ├── breadth.py
+│   │   └── correlation.py
+│   │
+│   └── reports/
+│
+├── src/
+│   ├── main.py
+│   ├── fetch_data.py
+│   ├── fetch_vix.py
+│   ├── metrics.py
+│   ├── backtest.py
+│   ├── optimize.py
+│   ├── walkforward.py
+│   ├── signals.py
+│   └── visualize.py
+│
+└── README.md
 ```
 
 ---
 
-## 📊 Key Features
-
-### Market Indicators
-- **Volatility**: Annualized volatility & 52-week high/low
-- **Trend**: 200-day moving average, above/below trend states
-- **Fear Level**: VIX-based fear classification (LOW/NORMAL/HIGH/PANIC)
-- **Market Regime**: Bull or Bear market classification
-
-### Breadth Analysis
-- Percentage of stocks trading above 50-day MA
-- Breadth strength rating (STRONG/NEUTRAL/WEAK)
-
-### Correlation Study
-- NIFTY-VIX correlation tracking
-- 30-day rolling correlation
-- Correlation regimes (PANIC/RISK-OFF/NORMAL/DISCONNECTED)
-
-### Backtesting & Optimization
-- Strategy backtesting with performance metrics
-- Parameter optimization (moving average periods)
-- Walk-forward validation
-- Drawdown analysis & recovery metrics
-
-### Research Modules
-- **VIX Study**: Regime analysis during different market conditions
-- **Trend Study**: Returns analysis based on trend persistence
-- **Drawdown Study**: Recovery time after drawdowns
-
----
-
-## 📈 Sample Output
+## Example Output
 
 ```
-MARKET SUMMARY
-------------------------------
-Nifty Price    : 23,150.45
-India VIX      : 14.25
-Fear Level     : NORMAL
-Market Regime  : BULL MARKET
+============================================================
+NIFTY 50 MARKET ANALYSIS
+============================================================
 
-MARKET BREADTH
-------------------------------
-Stocks Above 50 DMA : 28/50
-Breadth Strength    : STRONG
+Market Summary
+Market Breadth
+Volatility Analysis
+Correlation Analysis
+Trading Signal
+Backtest Results
+Walk Forward Validation
 
-NIFTY <-> VIX CORRELATION
-------------------------------
-Correlation : -0.85
-30 DAY ROLLING CORRELATION: -0.78
-Correlation Regime : PANIC CORRELATION
+============================================================
+Research Studies
+============================================================
 
-TRADING SIGNAL
-------------------------------
-Signal : BUY
+VIX Regime Study
+Trend Persistence Study
+Drawdown Recovery Study
+Drawdown Distribution Analysis
 ```
 
 ---
 
-## 🔧 How to Use
+## Tech Stack
 
-### Run Full Analysis
-```bash
-python main.py
-```
-
-### Run Individual Analysis
-```python
-from fetch_data import get_nifty_data, get_vix_data
-from metrics import annualized_volatility, moving_averages
-
-nifty = get_nifty_data()
-vol = annualized_volatility(nifty)
-dma200 = moving_averages(nifty, 200)
-```
-
-### Backtest a Strategy
-```python
-from backtest import run_backtest
-portfolio = run_backtest(nifty)
-print(portfolio.stats())
-```
-
-### Optimize Strategy Parameters
-```python
-from optimize import optimize_strategy
-results = optimize_strategy(nifty)
-for result in results:
-    print(f"MA: {result['MA']} | Sharpe: {result['Sharpe']:.2f}")
-```
+- Python
+- Pandas
+- NumPy
+- yfinance
+- VectorBT
+- Matplotlib
 
 ---
 
-## 📦 Requirements
+## Current Findings
 
-- Python 3.8+
-- yfinance (data fetching)
-- pandas (data processing)
-- numpy (calculations)
-- matplotlib (plotting)
+Some observations from the current research:
 
-See `requirements.txt` for full list.
+- Higher market stress has often been followed by stronger medium-term recoveries.
+- Trading below the 200 DMA did not consistently underperform within the tested sample.
+- Moderate drawdowns showed stronger forward returns than normal market conditions.
+- Walk-forward validation highlighted that simple moving-average strategies failed to generalize, reinforcing the need for robust out-of-sample testing.
 
----
-
-## 🎯 Use Cases
-
-- **Day Traders**: Real-time market signals and breadth analysis
-- **Swing Traders**: Trend identification and strategy backtesting
-- **Researchers**: Market correlation and regime analysis
-- **Portfolio Managers**: Drawdown metrics and risk assessment
+These findings are descriptive rather than predictive and require testing over longer historical periods before drawing strong conclusions.
 
 ---
 
-## 📝 Notes
+## Roadmap
 
-- Data is fetched from Yahoo Finance (real-time)
-- NIFTY data: 5-year history
-- VIX data: 1-year history
-- Results cached in `data/nifty.csv`
+Planned research modules:
+
+- Stress Recovery Framework (Drawdown × VIX)
+- Breadth Persistence Analysis
+- Distance-from-Trend Studies
+- Cross-Asset Research (USDINR, Gold, S&P 500)
+- Statistical Significance Testing
+- Bootstrap Validation
+- Probability-Based Market State Engine
 
 ---
 
-## 📞 Contact
+## Disclaimer
 
-For questions or suggestions, feel free to reach out at preetxyz77@gmail.com
+This project is intended for quantitative research and educational purposes.
 
+It is **not** an automated trading system and should not be interpreted as investment advice.
+
+The emphasis is on understanding market behaviour through data rather than predicting prices.
+
+---
+
+## Author
+
+**Preet Sonar**
+
+Computer Science Undergraduate | Quantitative Finance & Data Research
+
+GitHub: https://github.com/preetx77
